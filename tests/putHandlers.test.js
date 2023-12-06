@@ -10,7 +10,7 @@ const requestBody = {
 	  ]
 }
 
-test('Status code should be 200', async () => {
+test('Should return 200 status code', async () => {
 	let actualStatusCode;
     try {
 		const response = await fetch(`${config.API_URL}api/v1/orders/2`, {
@@ -29,7 +29,7 @@ test('Status code should be 200', async () => {
 });
 
 
-test('Response body should contain....', async () => {
+test('Body should contain delivery Price', async () => {
 	let actualResponseBody;
     try {
 		const response = await fetch(`${config.API_URL}api/v1/orders/2`, {
@@ -45,4 +45,40 @@ test('Response body should contain....', async () => {
 	}
 
 	expect(actualResponseBody["deliveryPrice"]).toBe(0);
+});
+
+test('Body should contain delivery Time', async () => {
+	let actualResponseBody;
+    try {
+		const response = await fetch(`${config.API_URL}api/v1/orders/2`, {
+			method: 'PUT',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		});
+		actualResponseBody = await response.json();
+	} catch (error) {
+		console.error(error);
+	}
+
+	expect(actualResponseBody["deliveryTime"]).toBe("20~25");
+});
+
+test('Body should contain delivery Status', async () => {
+	let actualResponseBody;
+    try {
+		const response = await fetch(`${config.API_URL}api/v1/orders/2`, {
+			method: 'PUT',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		});
+		actualResponseBody = await response.json();
+	} catch (error) {
+		console.error(error);
+	}
+
+	expect(actualResponseBody["status"]).toBe(0);
 });

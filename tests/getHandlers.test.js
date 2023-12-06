@@ -13,7 +13,7 @@ test('Should return 200 status code....', async () => {
 });
 
 
-test('Body should contain....', async () => {
+test('Body should contain name', async () => {
 	let actualResponseBody;
 	try {
 		const response = await fetch(`${config.API_URL}api/v1/kits/1`);
@@ -22,4 +22,16 @@ test('Body should contain....', async () => {
 		console.error(error);
 	}
 	expect(actualResponseBody.name).toBe('For picnic');
+});
+
+
+test('Body should contain kit id', async () => {
+	let actualResponseBody;
+	try {
+		const response = await fetch(`${config.API_URL}api/v1/kits/1`);
+		actualResponseBody = await response.json();
+	} catch (error) {
+		console.error(error);
+	}
+	expect(actualResponseBody["id"]).toBe(1);
 });
